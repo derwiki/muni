@@ -1,0 +1,19 @@
+!!!
+
+%head
+  :css
+    .route .time:first-child {
+      font-weight: bold;
+    }
+
+%body
+  - routes.each do |stop, predictions|
+    %div.route
+      %div #{stop}:
+      %div
+        - predictions.each do |prediction|
+          %span.time
+            = succeed 'm' do
+              %span.minutes= prediction.minutes
+            = succeed 's,' do
+              %span.minutes= prediction.seconds.to_i % 60
