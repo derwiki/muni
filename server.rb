@@ -18,7 +18,6 @@ get '/' do
   ]
   routes = {}
   stops.map do |stop|
-    puts stop.inspect
     direction = stop.direction !~ /___O_/ ? 'Inbound' : 'Outbound'
     key = "#{stop.route_tag} #{direction} at #{stop.title}"
     routes[key] = stop.predictions
