@@ -6,10 +6,11 @@
     body {
       font-size: 36px;
       height: 450px;
-      background-image: url(//s3-us-west-1.amazonaws.com/potrerohillcam/bus-wip.png);
+      background-image: url(//s3-us-west-1.amazonaws.com/potrerohillcam/bus.png);
       background-size: contain;
       background-repeat: no-repeat;
       position: relative;
+      font-family: monospace;
     }
 
     .minutes,
@@ -17,29 +18,31 @@
       position: absolute;
     }
 
-    .route-10-early.minutes { top: 64px; left: 200px; }
-    .route-10-early.seconds { top: 64px; left: 313px; }
-    .route-10-late.minutes { top: 245px; left: 230px; }
-    .route-10-late.seconds { top: 245px; left: 325px; }
+    .early { font-size: 53px }
 
-    .route-48-early.minutes { top: 70px; left: 480px; }
-    .route-48-early.seconds { top: 70px; left: 607px; }
-    .route-48-late.minutes { top: 249px; left: 476px; }
-    .route-48-late.seconds { top: 249px; left: 569px; }
+    .route-10.early.minutes { top: 55px; left: 200px; }
+    .route-10.early.seconds { top: 55px; left: 304px; }
+    .route-10.late.minutes { top: 245px; left: 230px; }
+    .route-10.late.seconds { top: 245px; left: 325px; }
+
+    .route-48.early.minutes { top: 61px; left: 480px; }
+    .route-48.early.seconds { top: 61px; left: 596px; }
+    .route-48.late.minutes { top: 249px; left: 476px; }
+    .route-48.late.seconds { top: 249px; left: 569px; }
 
 %body
   %span.time
-    %span.route-10-early.minutes= routes["10"].first.minutes
-    %span.route-10-early.seconds= routes["10"].first.seconds.to_i % 60
+    %span.route-10.early.minutes= routes["10"].first.minutes
+    %span.route-10.early.seconds= routes["10"].first.seconds.to_i % 60
   %span.time
-    %span.route-10-late.minutes= routes["10"].last.minutes
-    %span.route-10-late.seconds= routes["10"].last.seconds.to_i % 60
+    %span.route-10.late.minutes= routes["10"].last.minutes
+    %span.route-10.late.seconds= routes["10"].last.seconds.to_i % 60
   %span.time
-    %span.route-48-early.minutes= routes["48"].first.minutes
-    %span.route-48-early.seconds= routes["48"].first.seconds.to_i % 60
+    %span.route-48.early.minutes= routes["48"].first.minutes
+    %span.route-48.early.seconds= routes["48"].first.seconds.to_i % 60
   %span.time
-    %span.route-48-late.minutes= routes["48"].last.minutes
-    %span.route-48-late.seconds= routes["48"].last.seconds.to_i % 60
+    %span.route-48.late.minutes= routes["48"].last.minutes
+    %span.route-48.late.seconds= routes["48"].last.seconds.to_i % 60
 
   %script{ src:"//code.jquery.com/jquery-3.2.1.slim.min.js", integrity:"sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=", crossorigin:"anonymous" }
   :javascript
