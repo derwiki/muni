@@ -5,29 +5,42 @@
   :css
     body {
       font-size: 36px;
-      height: 400px;
+      height: 450px;
       background-image: url(//s3-us-west-1.amazonaws.com/potrerohillcam/bus-wip.png);
       background-size: contain;
       background-repeat: no-repeat;
-    }
-    .route {
-      margin-bottom: 10px;
-    }
-    .route .time:first-child {
-      font-weight: bold;
+      position: relative;
     }
 
+    .minutes,
+    .seconds {
+      position: absolute;
+    }
+
+    .route-10-early.minutes { top: 64px; left: 200px; }
+    .route-10-early.seconds { top: 64px; left: 313px; }
+    .route-10-late.minutes { top: 245px; left: 230px; }
+    .route-10-late.seconds { top: 245px; left: 325px; }
+
+    .route-48-early.minutes { top: 70px; left: 480px; }
+    .route-48-early.seconds { top: 70px; left: 607px; }
+    .route-48-late.minutes { top: 249px; left: 476px; }
+    .route-48-late.seconds { top: 249px; left: 569px; }
+
 %body
-  - routes.each do |stop, predictions|
-    %div.route
-      %div #{stop}:
-      %div
-        - predictions.each do |prediction|
-          %span.time
-            = succeed 'm' do
-              %span.minutes= prediction.minutes
-            = succeed 's,' do
-              %span.seconds= prediction.seconds.to_i % 60
+  %span.time
+    %span.route-10-early.minutes= routes["10"].first.minutes
+    %span.route-10-early.seconds= routes["10"].first.seconds.to_i % 60
+  %span.time
+    %span.route-10-late.minutes= routes["10"].last.minutes
+    %span.route-10-late.seconds= routes["10"].last.seconds.to_i % 60
+  %span.time
+    %span.route-48-early.minutes= routes["48"].first.minutes
+    %span.route-48-early.seconds= routes["48"].first.seconds.to_i % 60
+  %span.time
+    %span.route-48-late.minutes= routes["48"].last.minutes
+    %span.route-48-late.seconds= routes["48"].last.seconds.to_i % 60
+
   %script{ src:"//code.jquery.com/jquery-3.2.1.slim.min.js", integrity:"sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=", crossorigin:"anonymous" }
   :javascript
     setTimeout(function() {
