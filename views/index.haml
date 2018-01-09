@@ -70,6 +70,10 @@
           seconds--;
         }
 
+        if (seconds < 10) {
+          seconds = '0' + seconds;
+        }
+
         $minutes.text(minutes);
         $seconds.text(seconds);
       });
