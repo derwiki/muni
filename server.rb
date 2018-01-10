@@ -14,13 +14,13 @@ STOPS = [
 
 get '/' do
   begin
-		retries ||= 0
-		routes = {}
-		STOPS.map do |stop|
-			routes[stop.route_tag] = stop.predictions.take(2)
-		end
+    retries ||= 0
+    routes = {}
+    STOPS.map do |stop|
+      routes[stop.route_tag] = stop.predictions.take(2)
+    end
 
-		haml :index, locals: { routes: routes }
+    haml :index, locals: { routes: routes }
 
   rescue StandardError => e
     puts "#{e.class}: #{e.message}"
