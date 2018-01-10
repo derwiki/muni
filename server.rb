@@ -14,7 +14,6 @@ STOPS = [
 
 get '/' do
   begin
-    retries ||= 0
     routes = {}
     STOPS.map do |stop|
       routes[stop.route_tag] = stop.predictions.take(2)
@@ -24,10 +23,6 @@ get '/' do
 
   rescue StandardError => e
     puts "#{e.class}: #{e.message}"
-    puts "retries #{retries}"
-    if (retries += 1) < 5
-      puts "retrying"
-      retry
-    end
+    retry
   end
 end
