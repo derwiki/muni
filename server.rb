@@ -15,14 +15,11 @@ STOPS = [
 get '/' do
   begin
     routes = {}
-    STOPS.map do |stop|
-      routes[stop.route_tag] = stop.predictions.take(2)
-    end
-
+    STOPS.map {|stop| routes[stop.route_tag] = stop.predictions.take(2)}
     haml :index, locals: { routes: routes }
 
   rescue StandardError => e
-    puts "#{e.class}: #{e.message}"
+    puts "#{Time.now}\t#{e.class}: #{e.message}"
     retry
   end
 end
