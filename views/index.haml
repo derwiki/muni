@@ -17,6 +17,13 @@
       font-family: 'Comic Sans MS', monospace;;
     }
 
+    #clock {
+      position: absolute;
+      top: 330px;
+      left: 280px;
+      font-size: 30px;
+    }
+
     .minutes,
     .seconds {
       position: absolute;
@@ -36,6 +43,7 @@
 
 %body
   #bus
+    #clock
     %span.time
       %span.route-10.early.minutes= routes["10"].first.minutes
       %span.route-10.early.seconds= routes["10"].first.seconds.to_i % 60
@@ -52,10 +60,10 @@
   %script{ src:"//code.jquery.com/jquery-3.2.1.slim.min.js", integrity:"sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=", crossorigin:"anonymous" }
   :javascript
     setTimeout(function() {
-      document.location = document.location; // hard refresh every 30s
+      document.location = document.location; // hard refresh every 10s
     }, 10000);
 
-    setInterval(function() {
+    function updateClock() {
       $('.time').each(function(idx, el) {
         const $time = $(el);
         const $minutes = $time.find('.minutes');
@@ -78,5 +86,17 @@
 
         $minutes.text(minutes);
         $seconds.text(seconds);
+
+        $('#clock').text(
+          new Date()
+            .toLocaleTimeString('en-US', {
+              hour: 'numeric',
+              hour12: true,
+              minute: 'numeric',
+              second: 'numeric',
+          })
+        )
       });
-    }, 1000);
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
